@@ -1,10 +1,12 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin  = require('html-webpack-plugin');
+// const HtmlWebpackPlugin  = require('html-webpack-plugin');
 const path = require('path');
 
 const config = {
 	entry: [
-		'./src/index.js'
+		'react-hot-loader/patch',
+		'webpack-hot-middleware/client',
+		'./client/index.js'
 	],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -12,11 +14,6 @@ const config = {
 		publicPath: '/static/'
 	},
 	devtool: 'inline-source-map',
-	devServer: {
-		contentBase: './dist',
-		port: 8989,
-		hot: true,
-	},
 	module: {
 		rules: [
 			{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader", },
@@ -42,12 +39,13 @@ const config = {
 		]
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			template: './src/index.html'
-		}),
-
-		new webpack.NamedModulesPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
+		// new HtmlWebpackPlugin({
+		// 	template: './src/index.html'
+		// }),
+
+		// new webpack.NamedModulesPlugin(),
+		// new webpack.HotModuleReplacementPlugin(),
 	],
 
 };
